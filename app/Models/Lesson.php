@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
 
 class Lesson extends Model implements HasMedia
 {
@@ -41,6 +42,31 @@ class Lesson extends Model implements HasMedia
         'updated_at',
         'deleted_at',
     ];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::created(function($lesson) {
+            $lesson->slug = $lesson->createSlug($lesson->title);
+            $lesson->save();
+        });
+    }
+
+    private function createSlug($title) {
+        if (static::whereSlug($slug = Str::slug($title))->exists()) {
+            $max = static::whereTitle($title)->latest('id')->skip(1)->value('slug');
+
+            if (is_numeric($max[-1])) {
+                return preg_replace_callback('/(\d+)$/', function($matches) {
+                    return $matches[1] + 1;
+                }, $max);
+            }
+
+            return "{$slug}-2";
+        }
+
+        return $slug;
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {

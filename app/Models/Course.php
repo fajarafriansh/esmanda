@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class Course extends Model implements HasMedia
 {
@@ -32,13 +34,41 @@ class Course extends Model implements HasMedia
 
     protected $fillable = [
         'title',
+        'slug',
         'description',
         'start_date',
-        'pablished',
+        'published',
         'created_at',
         'updated_at',
         'deleted_at',
     ];
+
+    protected static function boot() {
+        parent::boot();
+
+        static::created(function($course) {
+            $course->slug = $course->createSlug($course->title);
+            $course->save();
+        });
+    }
+
+    private function createSlug($title) {
+        $slug = Str::slug($title);
+
+        if (static::whereSlug($slug)->exists()) {
+            $max = static::whereTitle($title)->latest('id')->skip(1)->value('slug');
+
+            if (is_numeric($max[-1])) {
+                return preg_replace_callback('/(\d+)$/', function($matches) {
+                    return $matches[1] + 1;
+                }, $max);
+            }
+
+            return "{$slug}-2";
+        }
+
+        return $slug;
+    }
 
     public function registerMediaConversions(Media $media = null): void
     {
@@ -48,7 +78,7 @@ class Course extends Model implements HasMedia
 
     public function courseLessons()
     {
-        return $this->hasMany(Lesson::class, 'course_id', 'id');
+        return $this->hasMany(Lesson::class, 'course_id', 'id')->orderBy('position');
     }
 
     public function courseTests()
@@ -86,5 +116,15 @@ class Course extends Model implements HasMedia
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function scopeOfTeacher($query) {
+        if (!Auth::user()->is_admin) {
+            return $query->whereHas('teachers', function($q) {
+                $q->where('user_id', Auth::user()->id);
+            });
+        }
+
+        return $query;
     }
 }

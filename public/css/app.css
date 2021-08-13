@@ -1,0 +1,141 @@
+a.card {
+  transition:
+    0.6s transform cubic-bezier(.155,1.105,.295,1.12),
+    0.6s box-shadow,
+    0.6s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+}
+
+a.card:hover {
+  text-decoration: none;
+  transform: scale(1.03);
+  box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+}
+
+.card-cover {
+  position: relative;
+  width: 100%;
+  padding-bottom: 5%;
+}
+
+.cover-img-container {
+  position: relative;
+  width: 100%;
+  padding-top: 54.5%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.img-teacher-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-left: 4%;
+}
+
+.card-img-top {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.card-img-teacher {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border: 6px solid var(--bs-light);
+}
+
+@media (min-width: 375px) {
+  .card-img-teacher {
+    width: 76px;
+    height: 76px;
+    border-width: 7px;
+  }
+}
+@media (min-width: 414px) {
+  .card-img-teacher {
+    width: 84px;
+    height: 84px;
+    border-width: 7px;
+  }
+}
+@media (min-width: 768px) and (max-width:1023px) {
+  .card-img-teacher {
+    width: 68px;
+    height: 68px;
+    border-width: 7px;
+  }
+}
+@media (min-width: 1024px) {
+  .card-img-teacher {
+    width: 64px;
+    height: 64px;
+    border-width: 7px;
+  }
+}
+@media (min-width: 1280px) {
+  .card-img-teacher {
+    width: 76px;
+    height: 76px;
+    border-width: 8px;
+  }
+}
+@media (min-width: 1920px) {
+  .card-img-teacher {
+    width: 96px;
+    height: 96px;
+    border-width: 9px;
+  }
+}
+
+#lessonsList .accordion-button,
+#lessonsList .accordion-body {
+  padding: 1rem 0.8rem;
+}
+
+.accordion-button {
+  background-color: #fff;
+}
+
+.accordion-button:not(.collapsed),
+.accordion-button:hover {
+  background-color: var(--bs-light);
+}
+
+.accordion-item {
+  background-color: #fff;
+  /* border: 1px solid rgba(0, 0, 0, 0.125); */
+}
+
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: calc(.25rem - 1px);
+  border-top-right-radius: calc(.25rem - 1px);
+}
+.accordion-item:last-of-type .accordion-button.collapsed {
+  border-bottom-right-radius: calc(.25rem - 1px);
+  border-bottom-left-radius: calc(.25rem - 1px);
+}
+
+.list-group-item.button {
+  text-align: center;
+  font-weight: 400;
+  color: var(--bs-gray-dark);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-light);
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+.list-group-item.button:hover {
+  color: var(--bs-gray-dark);
+  background-color: var(--bs-primary);
+  border-color: var(--bs-light);
+  text-decoration: none;
+}

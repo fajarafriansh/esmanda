@@ -9,7 +9,8 @@ use App\Http\Requests\StoreCourseRequest;
 use App\Http\Requests\UpdateCourseRequest;
 use App\Models\Course;
 use App\Models\User;
-use Gate;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,7 @@ class CoursesController extends Controller
     {
         abort_if(Gate::denies('course_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $courses = Course::with(['teachers', 'media'])->get();
+        $courses = Course::ofTeacher()->with(['teachers', 'media'])->get();
 
         return view('admin.courses.index', compact('courses'));
     }
@@ -31,7 +32,7 @@ class CoursesController extends Controller
     {
         abort_if(Gate::denies('course_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $teachers = User::pluck('name', 'id');
+        $teachers = User::whereHas('roles', function($q) { $q->where('role_id', 2); })->pluck('name', 'id');
 
         return view('admin.courses.create', compact('teachers'));
     }
@@ -39,7 +40,8 @@ class CoursesController extends Controller
     public function store(StoreCourseRequest $request)
     {
         $course = Course::create($request->all());
-        $course->teachers()->sync($request->input('teachers', []));
+        $teachers = Auth::user()->is_admin ? $request->input('teachers', []) : [Auth::user()->id];
+        $course->teachers()->sync($teachers);
         if ($request->input('course_image', false)) {
             $course->addMedia(storage_path('tmp/uploads/' . basename($request->input('course_image'))))->toMediaCollection('course_image');
         }
@@ -55,7 +57,7 @@ class CoursesController extends Controller
     {
         abort_if(Gate::denies('course_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $teachers = User::pluck('name', 'id');
+        $teachers = User::whereHas('roles', function($q) { $q->where('role_id', 2); })->pluck('name', 'id');
 
         $course->load('teachers');
 
@@ -65,7 +67,8 @@ class CoursesController extends Controller
     public function update(UpdateCourseRequest $request, Course $course)
     {
         $course->update($request->all());
-        $course->teachers()->sync($request->input('teachers', []));
+        $teachers = Auth::user()->is_admin ? $request->input('teachers', []) : [Auth::user()->id];
+        $course->teachers()->sync($teachers);
         if ($request->input('course_image', false)) {
             if (!$course->course_image || $request->input('course_image') !== $course->course_image->file_name) {
                 if ($course->course_image) {

@@ -34,16 +34,6 @@
                 <span class="help-block">{{ trans('cruds.lesson.fields.title_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="slug">{{ trans('cruds.lesson.fields.slug') }}</label>
-                <input class="form-control {{ $errors->has('slug') ? 'is-invalid' : '' }}" type="text" name="slug" id="slug" value="{{ old('slug', '') }}" required>
-                @if($errors->has('slug'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('slug') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.lesson.fields.slug_helper') }}</span>
-            </div>
-            <div class="form-group">
                 <label for="lesson_image">{{ trans('cruds.lesson.fields.lesson_image') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('lesson_image') ? 'is-invalid' : '' }}" id="lesson_image-dropzone">
                 </div>
@@ -73,16 +63,6 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.lesson.fields.content_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="position">{{ trans('cruds.lesson.fields.position') }}</label>
-                <input class="form-control {{ $errors->has('position') ? 'is-invalid' : '' }}" type="number" name="position" id="position" value="{{ old('position', '') }}" step="1" required>
-                @if($errors->has('position'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('position') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.lesson.fields.position_helper') }}</span>
             </div>
             <div class="form-group">
                 <label for="files">{{ trans('cruds.lesson.fields.files') }}</label>

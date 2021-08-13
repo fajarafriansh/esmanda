@@ -11,9 +11,10 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug')->unique()->nullable();
             $table->longText('description')->nullable();
             $table->date('start_date')->nullable();
-            $table->boolean('pablished')->default(0)->nullable();
+            $table->boolean('published')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

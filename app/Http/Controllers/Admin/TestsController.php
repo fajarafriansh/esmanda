@@ -29,9 +29,11 @@ class TestsController extends Controller
     {
         abort_if(Gate::denies('test_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $courses = Course::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $courses = Course::ofTeacher()->get();
+        $courses_ids = $courses->pluck('id');
+        $courses = $courses->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $lessons = Lesson::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lessons = Lesson::whereIn('course_id', $courses_ids)->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $questions = Question::pluck('question', 'id');
 
@@ -50,9 +52,11 @@ class TestsController extends Controller
     {
         abort_if(Gate::denies('test_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $courses = Course::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $courses = Course::ofTeacher()->get();
+        $courses_ids = $courses->pluck('id');
+        $courses = $courses->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        $lessons = Lesson::pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $lessons = Lesson::whereIn('course_id', $courses_ids)->pluck('title', 'id')->prepend(trans('global.pleaseSelect'), '');
 
         $questions = Question::pluck('question', 'id');
 

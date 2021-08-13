@@ -40,7 +40,7 @@
                             {{ trans('cruds.course.fields.start_date') }}
                         </th>
                         <th>
-                            {{ trans('cruds.course.fields.pablished') }}
+                            {{ trans('cruds.course.fields.published') }}
                         </th>
                         <th>
                             &nbsp;
@@ -78,8 +78,8 @@
                                 {{ $course->start_date ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $course->pablished ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $course->pablished ? 'checked' : '' }}>
+                                <span style="display:none">{{ $course->published ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $course->published ? 'checked' : '' }}>
                             </td>
                             <td>
                                 @can('course_show')
@@ -157,7 +157,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

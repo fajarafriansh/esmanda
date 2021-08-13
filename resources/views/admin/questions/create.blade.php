@@ -2,51 +2,76 @@
 @section('content')
 
 <div class="card">
-    <div class="card-header">
-        {{ trans('global.create') }} {{ trans('cruds.question.title_singular') }}
-    </div>
+  <div class="card-header">
+    {{ trans('global.create') }} {{ trans('cruds.question.title_singular') }}
+  </div>
 
-    <div class="card-body">
-        <form method="POST" action="{{ route("admin.questions.store") }}" enctype="multipart/form-data">
-            @csrf
-            <div class="form-group">
-                <label class="required" for="question">{{ trans('cruds.question.fields.question') }}</label>
-                <textarea class="form-control {{ $errors->has('question') ? 'is-invalid' : '' }}" name="question" id="question" required>{{ old('question') }}</textarea>
-                @if($errors->has('question'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('question') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.question.fields.question_helper') }}</span>
+  <div class="card-body">
+    <form method="POST" action="{{ route("admin.questions.store") }}" enctype="multipart/form-data">
+      @csrf
+      <div class="form-group">
+        <label class="required" for="question">{{ trans('cruds.question.fields.question') }}</label>
+        <textarea class="form-control {{ $errors->has('question') ? 'is-invalid' : '' }}" name="question" id="question" required>{{ old('question') }}</textarea>
+        @if($errors->has('question'))
+          <div class="invalid-feedback">
+            {{ $errors->first('question') }}
+          </div>
+        @endif
+        <span class="help-block">{{ trans('cruds.question.fields.question_helper') }}</span>
+      </div>
+      <div class="form-group">
+        <label for="question_image">{{ trans('cruds.question.fields.question_image') }}</label>
+        <div class="needsclick dropzone {{ $errors->has('question_image') ? 'is-invalid' : '' }}" id="question_image-dropzone">
+        </div>
+        @if($errors->has('question_image'))
+          <div class="invalid-feedback">
+            {{ $errors->first('question_image') }}
+          </div>
+        @endif
+        <span class="help-block">{{ trans('cruds.question.fields.question_image_helper') }}</span>
+      </div>
+      <div class="form-group">
+        <label class="required" for="score">{{ trans('cruds.question.fields.score') }}</label>
+        <input class="form-control {{ $errors->has('score') ? 'is-invalid' : '' }}" type="number" name="score" id="score" value="{{ old('score', '1') }}" step="1" required>
+        @if($errors->has('score'))
+          <div class="invalid-feedback">
+            {{ $errors->first('score') }}
+          </div>
+        @endif
+        <span class="help-block">{{ trans('cruds.question.fields.score_helper') }}</span>
+      </div>
+      @for ($option =1; $option <=4; $option++)
+        <div class="form-group">
+          <label class="required" for="{{ 'option_text_' . $option }}">{{ trans('cruds.questionOption.fields.option_text') }}</label>
+          <textarea class="form-control {{ $errors->has('option_text_' . $option) ? 'is-invalid' : '' }}" name="{{ 'option_text_' . $option }}" id="{{ 'option_text_' . $option }}" required>{{ old('option_text'. $option) }}</textarea>
+          @if($errors->has('option_text_' . $option))
+            <div class="invalid-feedback">
+              {{ $errors->first('option_text_' . $option) }}
             </div>
-            <div class="form-group">
-                <label for="question_image">{{ trans('cruds.question.fields.question_image') }}</label>
-                <div class="needsclick dropzone {{ $errors->has('question_image') ? 'is-invalid' : '' }}" id="question_image-dropzone">
-                </div>
-                @if($errors->has('question_image'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('question_image') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.question.fields.question_image_helper') }}</span>
+          @endif
+          <span class="help-block">{{ trans('cruds.questionOption.fields.option_text_helper') }}</span>
+        </div>
+        <div class="form-group">
+          <div class="form-check {{ $errors->has('correct_' . $option) ? 'is-invalid' : '' }}">
+            <input type="hidden" name="{{ 'correct_' . $option }}" value="0">
+            <input class="form-check-input" type="checkbox" name="{{ 'correct_' . $option }}" id="{{ 'correct_' . $option }}" value="1" {{ old('correct_' . $option, 0) == 1 ? 'checked' : '' }}>
+            <label class="form-check-label" for="{{ 'correct_' . $option }}">{{ trans('cruds.questionOption.fields.correct') }}</label>
+          </div>
+          @if($errors->has('correct_' . $option))
+            <div class="invalid-feedback">
+              {{ $errors->first('correct_' . $option) }}
             </div>
-            <div class="form-group">
-                <label class="required" for="score">{{ trans('cruds.question.fields.score') }}</label>
-                <input class="form-control {{ $errors->has('score') ? 'is-invalid' : '' }}" type="number" name="score" id="score" value="{{ old('score', '1') }}" step="1" required>
-                @if($errors->has('score'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('score') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.question.fields.score_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-danger" type="submit">
-                    {{ trans('global.save') }}
-                </button>
-            </div>
-        </form>
-    </div>
+          @endif
+          <span class="help-block">{{ trans('cruds.questionOption.fields.correct_helper') }}</span>
+        </div>
+      @endfor
+      <div class="form-group">
+        <button class="btn btn-danger" type="submit">
+          {{ trans('global.save') }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 

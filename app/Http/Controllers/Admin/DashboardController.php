@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-class HomeController
+class DashboardController
 {
     public function index()
     {
-        return view('home');
+        return view('dashboard');
     }
 }

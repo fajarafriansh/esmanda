@@ -87,8 +87,8 @@ return [
             'course_image_helper' => ' ',
             'start_date'          => 'Start Date',
             'start_date_helper'   => ' ',
-            'pablished'           => 'Pablished',
-            'pablished_helper'    => ' ',
+            'published'           => 'Published',
+            'published_helper'    => ' ',
         ],
     ],
     'lesson' => [

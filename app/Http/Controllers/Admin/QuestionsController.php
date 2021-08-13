@@ -8,6 +8,7 @@ use App\Http\Requests\MassDestroyQuestionRequest;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Models\Question;
+use App\Models\QuestionOption;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -43,6 +44,17 @@ class QuestionsController extends Controller
 
         if ($media = $request->input('ck-media', false)) {
             Media::whereIn('id', $media)->update(['model_id' => $question->id]);
+        }
+
+        for ($o =1; $o <=4; $o++) {
+            $option = $request->input('option_text_' . $o, '');
+            if ($option != '') {
+                QuestionOption::create([
+                    'question_id' => $question->id,
+                    'option_text' => $option,
+                    'correct' => $request->input('correct_' . $o)
+                ]);
+            }
         }
 
         return redirect()->route('admin.questions.index');

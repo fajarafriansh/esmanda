@@ -298,3 +298,4 @@ Dropzone.options.filesDropzone = {
 }
 </script>
 @endsection
+

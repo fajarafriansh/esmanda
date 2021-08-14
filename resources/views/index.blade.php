@@ -3,7 +3,7 @@
 <section class="pt-6 bg-600" id="home">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 w-100" src="img/gallery/hero-header.png" width="470" alt="hero-header" /></div>
+      <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 w-100" src="img/illustrations/hero-header.png" width="470" alt="hero-header" /></div>
       <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
         <h4 class="fw-bold font-sans-serif">Become Master</h4>
         <h1 class="fs-6 fs-xl-7 mb-5">Learn New Skills Online Find Best Courses</h1>
@@ -20,7 +20,7 @@
       <div class="card card-span bg-secondary">
         <div class="card-body">
           <div class="row flex-center gx-0">
-            <div class="col-lg-4 col-xl-2 text-center text-xl-start"><img src="img/gallery/funfacts.png" width="170" alt="..." /></div>
+            <div class="col-lg-4 col-xl-2 text-center text-xl-start"><img src="img/illustrations/funfacts.png" width="170" alt="..." /></div>
             <div class="col-lg-8 col-xl-4">
               <h1 class="text-light fs-lg-4 fs-xl-5">Upcoming Our <span class="text-primary">Basic in Python </span>Course!</h1>
             </div>
@@ -109,19 +109,19 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/gallery/published.png" height="100" alt="..." />
+      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/illustrations/published.png" height="100" alt="..." />
         <h1 class="my-2">768</h1>
         <p class="text-info fw-bold">COURSES PUBLISHED</p>
       </div>
-      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/gallery/instructors.png" height="100" alt="..." />
+      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/illustrations/instructors.png" height="100" alt="..." />
         <h1 class="my-2">120</h1>
         <p class="text-info fw-bold">EXPERT INSTRUCTORS</p>
       </div>
-      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/gallery/learners.png" height="100" alt="..." />
+      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/illustrations/learners.png" height="100" alt="..." />
         <h1 class="my-2">8300</h1>
         <p class="text-info fw-bold">HAPPY LEARNERS</p>
       </div>
-      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/gallery/awards.png" height="100" alt="..." />
+      <div class="col-sm-6 col-lg-3 text-center mb-5"><img src="img/illustrations/awards.png" height="100" alt="..." />
         <h1 class="my-2">32</h1>
         <p class="text-info fw-bold">AWARDS ACHIEVED</p>
       </div>

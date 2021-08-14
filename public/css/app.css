@@ -148,3 +148,28 @@ a.card:hover {
 #loginModal .modal-body {
   padding: 1rem 3rem;
 }
+
+.social-button {
+  width: 100%;
+  border: 1px solid #dee0e2;
+}
+
+.social-button:hover {
+  background-color: #dee0e2;
+  border: 1px solid #dee0e2;
+}
+
+.social-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.navbar-brand img {
+  width: 180px;
+  height: auto;
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 4px 8px;
+}

@@ -24,13 +24,28 @@
 
   <nav class="navbar navbar-expand-lg navbar-light sticky-top py-3 d-block" data-navbar-on-scroll="data-navbar-on-scroll">
     <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="{{ asset('img/gallery/logo-n.png') }}" height="45" alt="logo" />
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0" id="navbarSupportedContent">
+      <div>
+        <button class="navbar-toggler ms-n2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="{{ route('home') }}">
+          <img src="{{ asset('img/gallery/logo-n.png') }}" alt="logo" />
+        </a>
+      </div>
+      <div class="order-2 order-lg-3 d-flex align-items-center">
+        @guest
+          <button class="ms-3 btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+            {{ trans('global.login') }}
+          </button>
+        @endguest
+        @auth
+          <a class="ms-3 btn btn-primary" href="{{ route('admin.home') }}" target="_blank" title="Goto Dashboard">
+            Dashboard
+          </a>
+          <button class="d-none d-md-block btn btn-outline-light ms-2" title="Logout"><i class="fas fa-sign-out-alt text-800"></i></button>
+        @endauth
+      </div>
+      <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0 order-3 order-lg-2" id="navbarSupportedContent">
         <ul class="navbar-nav ms-auto pt-2 pt-lg-0 font-base">
           <li class="nav-item px-2">
             <a class="nav-link {{ (request()->is('/')) ? 'active' : '' }}" href="{{ route('home') }}">
@@ -52,18 +67,14 @@
               {{ trans('app.menu.contact') }}
             </a>
           </li>
+          @auth
+            <li class="nav-item px-2 d-md-none">
+              <a class="nav-link {{ (request()->is('contact')) ? 'active' : '' }}" href="{{ route('contact') }}">
+                {{ trans('global.logout') }}
+              </a>
+            </li>
+          @endauth
         </ul>
-        @guest
-          <button class="ms-3 btn btn-primary order-1 order-lg-0" data-bs-toggle="modal" data-bs-target="#loginModal">
-            {{ trans('global.login') }}
-          </button>
-        @endguest
-        @auth
-          <a class="ms-3 btn btn-primary order-1 order-lg-0" href="{{ route('admin.home') }}" target="_blank" title="Goto Dashboard">
-            Dashboard
-          </a>
-          <button class="btn btn-outline-light ms-2" title="Logout"><i class="fas fa-sign-out-alt text-800"></i></button>
-        @endauth
       </div>
     </div>
   </nav>
@@ -76,8 +87,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h2>Login</h2>
-          <a class="mb-3 btn btn-outline-secondary" href="{{ route('google.login') }}">Login with Google</a>
+          <h2 class="mb-3">Login</h2>
+          <a class="mb-4 btn btn-lg social-button d-flex align-items-center justify-content-center" href="{{ route('google.login') }}">
+            <img src="{{ asset('img/svg/logo_google.svg') }}" alt="">
+            <span class="ms-2">Login with Google</span>
+          </a>
           <form class="mb-3">
             <div class="mb-2">or use your email to login</div>
             <div class="mb-3">
@@ -100,7 +114,7 @@
             </div>
           </form>
           <div class="d-grid gap-4">
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary btn-lg">
               {{ trans('global.login') }}
             </button>
             <div class="text-center">

@@ -56,29 +56,32 @@
 
   <div class="container">
     <div class="row">
-
-      @foreach ($courses as $course)
-        <div class="col-md-6 col-lg-4 mb-4">
-          <a class="card h-100" href="course/{{ $course->slug }}">
-            <div class="card-cover">
-              <div class="cover-img-container">
-                <img class="card-img-top w-100" src="img/gallery/ux-designer.png" alt="courses" />
+      @if (!$courses->isEmpty())
+        @foreach ($courses as $course)
+          <div class="col-md-6 col-lg-4 mb-4">
+            <a class="card h-100" href="{{ route('courses.show', $course->slug) }}">
+              <div class="card-cover">
+                <div class="cover-img-container">
+                  <img class="card-img-top w-100" src="img/gallery/ux-designer.png" alt="courses" />
+                </div>
+                <div class="img-teacher-container">
+                  <img class="card-img-teacher" src="img/gallery/teacher.jpg" />
+                </div>
               </div>
-              <div class="img-teacher-container">
-                <img class="card-img-teacher" src="img/gallery/teacher.jpg" />
+              <div class="card-body">
+                <h5 class="font-sans-serif fw-bold fs-md-0 fs-lg-1">
+                  {{ $course->title }}
+                </h5>
+                <p class="text-muted fs--1 stretched-link text-decoration-none">
+                  {{ $course->description }}
+                </p>
               </div>
-            </div>
-            <div class="card-body">
-              <h5 class="font-sans-serif fw-bold fs-md-0 fs-lg-1">
-                {{ $course->title }}
-              </h5>
-              <p class="text-muted fs--1 stretched-link text-decoration-none">
-                {{ $course->description }}
-              </p>
-            </div>
-          </a>
-        </div>
-      @endforeach
+            </a>
+          </div>
+        @endforeach
+      @else
+        <h2 class="text-center">No courses found</h2>
+      @endif
 
     </div>
   </div>

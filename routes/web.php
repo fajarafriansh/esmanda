@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\QuestionsController;
 use App\Http\Controllers\Admin\QuestionOptionController;
 use App\Http\Controllers\Admin\TestsController;
 use App\Http\Controllers\Auth\ChangePasswordController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CoursesController;
 use App\Http\Controllers\LessonsController;
@@ -47,7 +48,9 @@ Route::get('/home', function () {
     return redirect()->route('admin.home');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes(['register' => true]);
+Route::get('auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'callback']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');

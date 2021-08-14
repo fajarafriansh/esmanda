@@ -7,6 +7,7 @@
                 <h1>{{ trans('panel.site_title') }}</h1>
 
                 <p class="text-muted">{{ trans('global.login') }}</p>
+                <a href="{{ route('google.login') }}">Google login</a>
 
                 @if(session('message'))
                     <div class="alert alert-info" role="alert">

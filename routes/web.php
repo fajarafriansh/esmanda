@@ -51,7 +51,7 @@ Route::get('home', function () {
 });
 
 Auth::routes(['register' => true]);
-Route::get('auth/google/redirect', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'callback']);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], function () {

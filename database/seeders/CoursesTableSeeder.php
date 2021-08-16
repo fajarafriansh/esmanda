@@ -12,6 +12,7 @@ class CoursesTableSeeder extends Seeder
     {
         Course::factory()->count(5)->create()->each(function ($course) {
             $course->teachers()->sync([2]);
+            $course->categories()->sync([1]);
             $course->courseLessons()->saveMany(Lesson::factory()->count(10)->create());
         });
     }

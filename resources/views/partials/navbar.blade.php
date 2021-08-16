@@ -42,7 +42,10 @@
           <a class="ms-3 btn btn-primary" href="{{ route('admin.home') }}" target="_blank" title="Goto Dashboard">
             Dashboard
           </a>
-          <button class="d-none d-md-block btn btn-outline-light ms-2" title="Logout"><i class="fas fa-sign-out-alt text-800"></i></button>
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="d-none d-md-block btn btn-outline-light ms-2" title="Logout"><i class="fas fa-sign-out-alt text-800"></i></button>
+          </form>
         @endauth
       </div>
       <div class="collapse navbar-collapse border-top border-lg-0 mt-4 mt-lg-0 order-3 order-lg-2" id="navbarSupportedContent">
@@ -69,9 +72,12 @@
           </li>
           @auth
             <li class="nav-item px-2 d-md-none">
-              <a class="nav-link {{ (request()->is('contact')) ? 'active' : '' }}" href="{{ route('contact') }}">
-                {{ trans('global.logout') }}
-              </a>
+              <form id="logoutform" action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
+                  {{ trans('global.logout') }}
+                </a>
+              </form>
             </li>
           @endauth
         </ul>
@@ -92,36 +98,41 @@
             <img src="{{ asset('img/svg/logo_google.svg') }}" alt="">
             <span class="ms-2">Login with Google</span>
           </a>
-          <form class="mb-3">
-            <div class="mb-2">or use your email to login</div>
+
+          <form action="{{ route('login') }}" method="POST">
+            @csrf
             <div class="mb-3">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-            </div>
-            <div class="d-flex justify-content-between">
-              <div class="mb-0 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">{{ trans('global.remember_me') }}</label>
+              <div class="mb-2">or use your email to login</div>
+              <div class="mb-3">
+                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email" required autocomplete="email">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
-              @if(Route::has('password.request'))
-                <a class="" href="{{ route('password.request') }}">
-                  {{ trans('global.forgot_password') }}
-                </a>
-              @endif
+              <div class="mb-3">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password" required autocomplete="new-password">
+              </div>
+              <div class="d-flex justify-content-between">
+                <div class="mb-0 form-check">
+                  <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                  <label class="form-check-label" for="remember">{{ trans('global.remember_me') }}</label>
+                </div>
+                @if(Route::has('password.request'))
+                  <a class="" href="{{ route('password.request') }}">
+                    {{ trans('global.forgot_password') }}
+                  </a>
+                @endif
+              </div>
+            </div>
+            <div class="d-grid gap-4">
+              <button type="submit" class="btn btn-primary btn-lg">
+                {{ trans('global.login') }}
+              </button>
+              <div class="text-center">
+                <span>Need an account?</span>
+                <a href="{{ route('register') }}?redirect={{ request()->path() }}">Register</a>
+              </div>
             </div>
           </form>
-          <div class="d-grid gap-4">
-            <button type="button" class="btn btn-primary btn-lg">
-              {{ trans('global.login') }}
-            </button>
-            <div class="text-center">
-              <span>Need an account?</span>
-              <a href="{{ route('register') }}">Register</a>
-            </div>
-          </div>
+
         </div>
         <div class="modal-footer">
         </div>

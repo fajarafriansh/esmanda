@@ -29,18 +29,20 @@ use App\Http\Controllers\LessonsController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/courses', [CoursesController::class, 'index'])->name('courses');
-Route::get('/course/{slug}', [CoursesController::class, 'show'])->name('courses.show');
-Route::get('/lesson/{slug}', [LessonsController::class, 'show'])->name('lessons.show');
-Route::get('/about', function() {
+Route::get('courses', [CoursesController::class, 'index'])->name('courses');
+Route::get('course/{slug}', [CoursesController::class, 'show'])->name('courses.show');
+Route::get('lesson/{slug}', [LessonsController::class, 'show'])->name('lessons.show');
+Route::get('about', function() {
     return view('about');
 })->name('about');
-Route::get('/contact', function() {
+Route::get('contact', function() {
     return view('contact');
 })->name('contact');
 
+Route::post('course/enrol', [CoursesController::class, 'enrol'])->name('courses.enrol');
+
 // Route::redirect('/admin', '/login');
-Route::get('/home', function () {
+Route::get('home', function () {
     if (session('status')) {
         return redirect()->route('admin.home')->with('status', session('status'));
     }

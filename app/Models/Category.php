@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Course;
 
 class Category extends Model
 {
@@ -24,7 +23,8 @@ class Category extends Model
         'name',
     ];
 
-    public function courses() {
-        return $this->hasMany(Course::class);
+    public function categoriesCourses()
+    {
+        return $this->belongsToMany(Course::class);
     }
 }

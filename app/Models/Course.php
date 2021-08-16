@@ -76,6 +76,11 @@ class Course extends Model implements HasMedia
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
     public function courseLessons()
     {
         return $this->hasMany(Lesson::class, 'course_id', 'id')->orderBy('position');

@@ -28,7 +28,18 @@
             <li class="list-group-item"><strong>Categories </strong>: Technology</li>
             <li class="list-group-item"><strong>Lectures </strong>: {{ $course->courseLessons->count()}}</li>
             <li class="list-group-item"><strong>Level </strong>: Intermediate Level</li>
-            <a class="list-group-item button" href="#">Enrol The Course</a>
+            @guest
+              <button class="list-group-item button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                {{ trans('global.login') }}
+              </button>
+            @endguest
+            @auth
+              <form action="{{ route('courses.enrol') }}" method="POST">
+                @csrf
+                <input type="hidden" name="course_id" value="{{ $course->id }}">
+                <button type="submit" class="list-group-item button">Enrol The Course</button>
+              </form>
+            @endauth
           </ul>
         </div>
       </div>

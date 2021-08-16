@@ -24,6 +24,7 @@ class CourseFactory extends Factory
         return [
             'title' => $this->faker->name(),
             'description' => $this->faker->text(),
+            'access_code' => substr(md5(microtime()), 0, 8),
             'published' => 1,
         ];
     }

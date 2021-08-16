@@ -14,6 +14,7 @@ class CreateCoursesTable extends Migration
             $table->string('slug')->unique()->nullable();
             $table->longText('description')->nullable();
             $table->date('start_date')->nullable();
+            $table->string('access_code')->unique();
             $table->boolean('published')->default(0)->nullable();
             $table->timestamps();
             $table->softDeletes();

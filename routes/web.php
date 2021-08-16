@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CoursesController as AdminCoursesController;
 use App\Http\Controllers\Admin\LessonsController as AdminLessonsController;
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\QuestionsController;
 use App\Http\Controllers\Admin\QuestionOptionController;
 use App\Http\Controllers\Admin\TestsController;
@@ -73,6 +74,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth']], 
     Route::post('courses/media', [AdminCoursesController::class, 'storeMedia'])->name('courses.storeMedia');
     Route::post('courses/ckmedia', [AdminCoursesController::class, 'storeCKEditorImages'])->name('courses.storeCKEditorImages');
     Route::resource('courses', AdminCoursesController::class);
+
+    // Categories
+    Route::delete('categories/destroy', [CategoriesController::class, 'massDestroy'])->name('categories.massDestroy');
+    Route::resource('categories', CategoriesController::class);
 
     // Lessons
     Route::delete('lessons/destroy', [AdminLessonsController::class, 'massDestroy'])->name('lessons.massDestroy');

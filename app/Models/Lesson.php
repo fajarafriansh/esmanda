@@ -53,7 +53,9 @@ class Lesson extends Model implements HasMedia
     }
 
     private function createSlug($title) {
-        if (static::whereSlug($slug = Str::slug($title))->exists()) {
+        $slug = Str::slug($title);
+
+        if (static::whereSlug($slug)->exists()) {
             $max = static::whereTitle($title)->latest('id')->skip(1)->value('slug');
 
             if (is_numeric($max[-1])) {

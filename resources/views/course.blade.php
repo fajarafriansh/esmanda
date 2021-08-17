@@ -34,11 +34,7 @@
               </button>
             @endguest
             @auth
-              <form action="{{ route('courses.enrol') }}" method="POST">
-                @csrf
-                <input type="hidden" name="course_id" value="{{ $course->id }}">
-                <button type="submit" class="list-group-item button">Enrol The Course</button>
-              </form>
+            <button type="submit" class="list-group-item button" data-bs-toggle="modal" data-bs-target="#enrolModal">Enrol The Course</button>
             @endauth
           </ul>
         </div>
@@ -75,4 +71,31 @@
   <!-- end of .container-->
 
 </section>
+
+<!-- Modal -->
+<div class="modal fade" id="enrolModal" tabindex="-1" aria-labelledby="enrolModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <h4>Enter course access code</h4>
+          <div>Ask your teacher if you don't have access code</div>
+        </div>
+        <form class="d-flex flex-column align-items-center" action="{{ route('courses.enrol') }}" method="POST">
+          @csrf
+          <input type="hidden" name="course_id" value="{{ $course->id }}">
+          <div class="mb-4">
+            <input type="text" name="access_code" class="form-control" placeholder="Course access code" required>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">Enrol The Course</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>
 @endsection

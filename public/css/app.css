@@ -141,7 +141,9 @@ a.card:hover {
 }
 
 #loginModal .modal-header,
-#loginModal .modal-footer {
+#loginModal .modal-footer,
+#enrolModal .modal-header,
+#enrolModal .modal-footer {
   border: none;
 }
 

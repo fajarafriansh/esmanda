@@ -36,7 +36,9 @@ class CoursesController extends Controller
     public function enrol(Request $request)
     {
         $course = Course::findOrFail($request->get('course_id'));
-        $course->students()->attach(Auth::id());
+        if ($request->access_code == $course->access_code) {
+            $course->students()->attach(Auth::id());
+        }
 
         return redirect()->back();
     }

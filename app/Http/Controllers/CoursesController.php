@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Course;
 use App\Models\User;
+use Alert;
 
 class CoursesController extends Controller
 {
@@ -38,7 +39,13 @@ class CoursesController extends Controller
         $course = Course::findOrFail($request->get('course_id'));
         if ($request->access_code == $course->access_code) {
             $course->students()->attach(Auth::id());
+
+            Alert::toast('You have successfully enrolled in this course.', 'success');
+
+            return redirect()->route('courses.show', ['slug' => $course->slug]);
         }
+
+        Alert::toast('You do not have permission to access this course.', 'error');
 
         return redirect()->back();
     }

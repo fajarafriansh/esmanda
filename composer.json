@@ -18,7 +18,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.5",
-        "realrashid/sweet-alert": "^4.0",
+        "realrashid/sweet-alert": "^5.0",
         "spatie/laravel-medialibrary": "^9.7"
     },
     "require-dev": {

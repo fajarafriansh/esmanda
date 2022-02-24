@@ -9,7 +9,7 @@
         "bugsnag/bugsnag-laravel": "^2.22",
         "doctrine/dbal": "^3.1",
         "fideloper/proxy": "^4.4",
-        "fruitcake/laravel-cors": "^2.0",
+        "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/dusk": "^6.15",
         "laravel/framework": "^8.40",
